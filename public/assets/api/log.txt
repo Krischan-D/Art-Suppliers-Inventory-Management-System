@@ -1,0 +1,126 @@
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: 
+No new image uploaded. Using existing image: e50958e7-f272-4b34-9711-dbf5e716381f.jpg
+POST DATA:
+Array
+(
+    [method] => POST
+    [_method] => POST
+    [id] => 
+    [name] => sketch book
+    [price] => 150
+    [stock] => 100
+    [category] => Clothing
+    [supplier] => Fashion Trends
+    [description] => asdawdwada
+)
+FILES DATA:
+Array
+(
+    [image] => Array
+        (
+            [name] => Hospital_ERD_with_Cardinality.png
+            [full_path] => Hospital_ERD_with_Cardinality.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php799F.tmp
+            [error] => 0
+            [size] => 17718
+        )
+
+)
+TMP FILE: C:\xampp\tmp\php799F.tmp
+DESTINATION: C:\xampp\htdocs\Arventory System\public\assets\api/../../uploads/1743755621_Hospital_ERD_with_Cardinality.png
+DIR EXISTS: YES
+DIR PERMISSIONS: 0777
+POST DATA:
+Array
+(
+    [method] => POST
+    [_method] => POST
+    [id] => 
+    [name] => NEW PRODUCT AGAINN
+    [price] => 800
+    [stock] => 20
+    [category] => Electronics
+    [supplier] => Fresh Market
+    [description] => SDASSDAASDD
+)
+FILES DATA:
+Array
+(
+    [image] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+
+)
+POST DATA:
+Array
+(
+    [method] => POST
+    [_method] => POST
+    [id] => 
+    [name] => dasd
+    [price] => 121
+    [stock] => 12
+    [category] => Clothing
+    [supplier] => Fresh Market
+    [description] => asdassddsada
+)
+FILES DATA:
+Array
+(
+    [image] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+
+)
+POST DATA:
+Array
+(
+    [method] => POST
+    [_method] => POST
+    [id] => 
+    [name] => asdsadsa
+    [price] => 12121
+    [stock] => 1211
+    [category] => Clothing
+    [supplier] => Fresh Market
+    [description] => asdsdadasdsaasda
+)
+FILES DATA:
+Array
+(
+    [image] => Array
+        (
+            [name] => 
+            [full_path] => 
+            [type] => 
+            [tmp_name] => 
+            [error] => 4
+            [size] => 0
+        )
+
+)

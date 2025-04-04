@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+
+@theme{
+    --font-Inter: "Inter", sans-serif
+}
+
+
+/* transform: scale(0.8); */
+#crud-modal, #popup-modal, #view-modal {
+    opacity: 0;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    pointer-events: none;
+}
+
+#crud-modal.active, #popup-modal.active, #view-modal.active{
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+
+
+
+#modal, #deleteModal, #viewModal{
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    pointer-events: none;
+}
+#modal.active, #deleteModal.active, #viewModal.active{
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+#toast{
+    opacity: 0;
+    transform: translateY(2em);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    pointer-events: none;
+}
+
+#toast.active{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
