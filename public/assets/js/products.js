@@ -114,16 +114,61 @@ function renderProducts(products) {
 
 function setUpListeners(){
     document.querySelectorAll('.edit-btn').forEach(btn => {
-
         btn.addEventListener('click', async (e) => {
+            // Prevent previous event handlers
+            e.stopPropagation();
+    
+   
+            const button = e.target.closest('.edit-btn');
+            if (!button) return;
+    
+           
+            if (!productsData || productsData.length === 0) {
+                console.error("Product data is not loaded yet.");
+                showToast("Please wait, data is still loading.", "error");
+    
+                // Show skeleton loader
+                const skeleton = skeletonTemplate();
+                modal.loadFormTemplate(skeleton).open();
+                return;
+            }
+    
 
-            
-            const productId = Number(e.target.dataset.id);
+            const productId = Number(button.dataset.id);
+    
+        
+            if (isNaN(productId)) {
+                console.error("Invalid product ID");
+                showToast("Error: Invalid product ID", "error");
+                return;
+            }
+    
+        
             const product = productsData.find(p => p.id === productId);
-            const formTemplate  = ProductFormTemplate(true, product, categoriesData, suppliersData)
-            modal.loadFormTemplate(formTemplate, submitProduct).open()
-
-
+    
+            if (!product) {
+                console.error(`Product with ID ${productId} not found`);
+                showToast(`Product with ID ${productId} not found`, "error");
+    
+                const skeleton = skeletonTemplate();
+                modal.loadFormTemplate(skeleton).open();
+                return;
+            }
+    
+            // // Validate product data before rendering
+            // const requiredFields = ['id', 'name', 'category', 'supplier', 'price', 'description'];
+            // const missingFields = requiredFields.filter(field => !product[field] && product[field] !== 0);
+    
+            // if (missingFields.length > 0) {
+            //     console.error(`Product is missing required fields: ${missingFields.join(', ')}`);
+            //     showToast("Error: Product data is incomplete", "error");
+            //     return;
+            // }
+    
+            // When data is ready and validated, render the edit form
+            const formTemplate = ProductFormTemplate(true, product, categoriesData, suppliersData);
+            modal.loadFormTemplate(formTemplate, submitProduct).open();
+    
             console.log(`Edit product with ID: ${productId}`);
         });
     });

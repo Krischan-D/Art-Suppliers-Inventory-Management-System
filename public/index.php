@@ -40,5 +40,42 @@
 
 <body>
     
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const sidebarBtn = document.getElementById("sidebarBtn");
+    const sidebar = document.getElementById("logo-sidebar");
+    const backDrop = document.getElementById('sidebarBackdrop')
+    sidebarBtn.addEventListener("click", function () {
+      sidebar.classList.toggle("active");
+      backDrop.classList.toggle("active");
+   
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!sidebar.contains(e.target) && e.target !== sidebarBtn) {
+        sidebar.classList.remove("active");
+        backDrop.classList.remove("active");
+    }
+    });
+
+    // Prevent clicks inside sidebar from closing it
+    sidebar.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+
+    window.addEventListener("resize", function () {
+        if (window.innerWidth >= 1024) { // Adjust the breakpoint if necessary
+            sidebar.classList.remove("active");
+            backDrop.classList.remove("active");
+        }
+    });
+
+
+  });
+
+  
+
+</script>
+
 </body>
 </html>

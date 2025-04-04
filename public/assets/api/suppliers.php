@@ -45,6 +45,63 @@ switch($method){
 
 
         break;
+    case 'PUT':
+
+        $input = file_get_contents('php://input');
+        $data = json_decode($input, true);
+    
+        // Validate JSON
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception('Invalid JSON data');
+        }
+
+        $id = $data['id'] ?? null;
+        $name = $data['name'] ?? null;
+        $address = $data['address'] ?? null ;
+        $email = $data['email'] ?? null ;
+        $phone = $data['phone'] ?? null;
+
+        
+        $updateSupplier = $db->query('UPDATE supplier SET name = :name, address = :address, email = :email, phone = :phone WHERE id = :id', [
+            'name' => $name,
+            'address' => $address,
+            'email' => $email,
+            'phone' => $phone,
+            'id' => $id
+         ]);
+
+         echo json_encode([
+            "id" => $id,
+            "name" => $name,
+            "address" => $address,
+            "email" => $email,
+            "phone" => $phone,
+        ]);
+
+
+    case 'DELETE':
+        $input = file_get_contents('php://input');
+        $data = json_decode($input, true);
+        
+
+        // Validate JSON
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new Exception('Invalid JSON data');
+        }
+    
+        $supplierId = $data['supplierId'] ?? ($data ?: null);
+
+        
+        $deleteSupplier = $db->query('DELETE FROM supplier WHERE id =:id', [
+            'id' => $supplierId
+            ]);
+
+        echo json_encode([
+            "success" => true,
+            "message" => "Supplier deleted successfully!",
+            "id" => $supplierId
+            
+        ]);
 
 
 

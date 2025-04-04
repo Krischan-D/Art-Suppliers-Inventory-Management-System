@@ -155,9 +155,7 @@ export class Modal{
                         }
                     });
 
-                    requiredFields.forEach(field => console.log(field))
 
-                    // const requiredFields = ["name", "price", "category", "supplier", "description", ];
                     const validation = validateData(formData, requiredFields);
     
                     removeBorderErrors(requiredFields);

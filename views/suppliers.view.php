@@ -32,7 +32,7 @@
                     <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
                     </svg>
-                    Add new product
+                    Add new supplier
                 </button>
             </div>
             <div class="mt-4">
@@ -230,6 +230,9 @@
             </div>
 
         </div>
+    </div>
+    <div id="popup-modal" tabindex="-1" class=" flex bg-black/40 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full " id="deleteModal"></div>
     </div>
 
 

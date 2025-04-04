@@ -6,8 +6,8 @@
 <main class="p-4 lg:ml-64 h-full pt-10">
    <div class="">
       <div class="p-4 border-2 border-gray-200  rounded-lg bg-white mt-8">
-         <div class="grid grid-cols-2  sm:grid-cols-3 gap-4 mb-4">
-            <div class="flex items-center  h-24 rounded-sm bg-white shadow-sm  p-4 ">
+         <div class="grid grid-cols-1   md:grid-cols-2 xl:grid-cols-3 gap-4 mb-4">
+            <div class="flex items-center  grid-cols-2 h-24 rounded-sm bg-white shadow-sm  p-4 ">
 
                <div class="w-full  h-full flex gap-4 items-center" >
                   <div class="bg-red-400/15 rounded-md size-15 flex items-center justify-center">
@@ -33,6 +33,7 @@
                   </div>
                </div>
             </div>
+           
              <div class="flex items-center  h-24 rounded-sm bg-white shadow-sm  p-4 ">
 
                <div class="w-full  h-full flex gap-4 items-center">
@@ -48,6 +49,7 @@
                </div>
 
             </div>
+           
             <div class="flex items-center  h-24 rounded-sm bg-white shadow-sm  p-4 ">
 
             <div class="w-full  h-full flex gap-4 items-center">
@@ -67,7 +69,7 @@
          </div>
          
 
-         <div class="grid grid-cols-2 gap-4 mb-4 h-full ">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 h-full ">
             <div class="flex  flex-col p-4 justify-center rounded-sm bg-white shadow-md  ">
                <div class="flex justify-between">
                   <h1 class="font-bold mb-4">Recent Price Changes</h1>

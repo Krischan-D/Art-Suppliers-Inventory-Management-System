@@ -22,8 +22,17 @@
     pointer-events: auto;
 }
 
+#logo-sidebar.active{
+    transform: translateX(100%);
+}
 
+/* #sidebarBackdrop{
+    display: hidden;
+} */
 
+#sidebarBackdrop.active{
+    display: flex;
+}
 
 #modal, #deleteModal, #viewModal{
     opacity: 0;

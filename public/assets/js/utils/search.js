@@ -27,7 +27,7 @@ function debounce(func, wait){
 }
 
 function onInput(event) {
-    searchValue = event.target.value.toLowerCase();
+    searchValue = event.target.value.trim().toLowerCase();
     console.log('Input value:', searchValue);
     if(cbFunc){
         cbFunc(searchValue)

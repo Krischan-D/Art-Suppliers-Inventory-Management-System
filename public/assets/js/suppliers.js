@@ -17,6 +17,13 @@ const modal = new Modal({
     cancelButtonId: 'cancelBtn',
 })
 
+const deleteModal = new Modal({
+    modalContainerId: 'popup-modal',
+    modalId: 'deleteModal',
+    closeButtonId: 'closeDeleteModal',
+    cancelButtonId: 'cancelButton'
+});
+
 
 let data = []
 
@@ -116,36 +123,109 @@ function applyFilter() {
 
 function setUpListeners(){
     document.querySelectorAll('.edit-btn').forEach(btn => {
-
         btn.addEventListener('click', async (e) => {
+            // Prevent previous event handlers
+            e.stopPropagation();
+    
+   
+            const button = e.target.closest('.edit-btn');
+            if (!button) return;
+    
+           
+            if (!data || data.length === 0) {
+                console.error("Product data is not loaded yet.");
+                showToast("Please wait, data is still loading.", "error");
+    
+                // Show skeleton loader
+                const skeleton = skeletonTemplate();
+                modal.loadFormTemplate(skeleton).open();
+                return;
+            }
+    
 
-            
-            const id = Number(e.target.dataset.id);
-            const product = data.find(p => p.id === id);
-            const formTemplate  = SupplierFormTemplate(true, product)
-            console.log(formTemplate)
-            
-            modal.loadFormTemplate(formTemplate, null).open()
-
-
-            console.log(`Edit product with ID: ${id}`);
+            const supplierId = Number(button.dataset.id);
+    
+        
+            if (isNaN(supplierId)) {
+                console.error("Invalid product ID");
+                showToast("Error: Invalid product ID", "error");
+                return;
+            }
+    
+        
+            const supplierdData = data.find(p => p.id === supplierId);
+            console.log(supplierdData)
+            if (!supplierdData) {
+                console.error(`Product with ID ${supplierId} not found`);
+                showToast(`Product with ID ${supplierId} not found`, "error");
+    
+                const skeleton = skeletonTemplate();
+                modal.loadFormTemplate(skeleton).open();
+                return;
+            }
+    
+    
+            const formTemplate = SupplierFormTemplate(true, supplierdData);
+            modal.loadFormTemplate(formTemplate, addSupplier).open();
+    
+            console.log(`Edit product with ID: ${supplierId}`);
         });
     });
 
     document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const productId = Number(e.target.dataset.id);
-            const product = productsData.find(p => p.id === productId);
+        btn.addEventListener('click', async (e) => {
+            // Prevent previous event handlers
+           
+            e.stopPropagation();
+ 
+            const button = e.target.closest('.delete-btn');
+            if (!button) return;
+        
+           
+            if (!data || data.length === 0) {
+                console.error("Product data is not loaded yet.");
+                showToast("Please wait, data is still loading.", "error");
+    
+                // Show skeleton loader
+                const skeleton = skeletonTemplate();
+                modal.loadFormTemplate(skeleton).open();
+                return;
+            }
+    
+
+            const supplierId = Number(e.target.dataset.id);
+    
+        
+            if (isNaN(supplierId)) {
+                console.error("Invalid product ID");
+                showToast("Error: Invalid product ID", "error");
+                return;
+            }
+    
+        
+            const supplierData = data.find(p => p.id === supplierId);
+            console.log(supplierData)
+            if (!supplierData) {
+                console.error(`Product with ID ${supplierId} not found`);
+                showToast(`Product with ID ${supplierId} not found`, "error");
+    
+                const skeleton = skeletonTemplate();
+                modal.loadFormTemplate(skeleton).open();
+                return;
+            }
             
+            console.log('clicked')
+    
             deleteModal.createConfirmation({
-                title: 'Delete Product', 
-                message: `Are you sure you want to delete product ID:${productId}, Name: ${product.name}?`,
+                title: 'Delete Supplier', 
+                message: `Are you sure you want to delete Supplier ID:${supplierId} Name: ${supplierData.name} ?`,
                 onConfirm: () => {
-                    deleteProduct(product.id)
+                    deleteSupplier(supplierId)
                 }
             }).open()
-            console.log(`Delete product with ID: ${productId}`);
         });
+
+        
     });
 }
 
@@ -158,38 +238,107 @@ async function addSupplier(formData, method){
             console.log(value, key)
         })
 
-        // try {
-        //     const response = await fetch("assets/api/suppliers.php", {
-        //         method: "POST",
-        //         body: formData,
-        //     });
+        try {
+            const response = await fetch("assets/api/suppliers.php", {
+                method: "POST",
+                body: formData,
+            });
     
     
-        //     const text = await response.text();
-        //     console.log("Raw Response:", text); // Debug response
+            const text = await response.text();
+            console.log("Raw Response:", text); // Debug response
     
-        //     const result = JSON.parse(text);
-        //     console.log("Parsed JSON:", result);
+            const result = JSON.parse(text);
+            console.log("Parsed JSON:", result);
     
-        //     console.log(response.ok)
+            console.log(response.ok)
     
-        //     if (response.ok) {
-        //         modal.close()
-        //         console.log('it works here')
-        //         showToast("Product added successfully!", "success");
+            if (response.ok) {
+                modal.close()
+                console.log('it works here')
+                showToast("Product added successfully!", "success");
 
-        //         getData()
-        //     } 
-        // } catch (error) {
-        //     console.error("JSON Parse Error:", error);
-        //     alert("Invalid server response. Check console.");
-        // } 
+                getData()
+            } 
+        } catch (error) {
+            console.error("JSON Parse Error:", error);
+            alert("Invalid server response. Check console.");
+        } 
+
+    }else if(method === 'PUT'){
+      
+        const dataToSend = {
+            id: formData.get('id'), // or retrieve from form inputs directly
+            name: formData.get('name'),
+            address: formData.get('address'),
+            email: formData.get('email'),
+            phone: formData.get('phone')
+        }
+
+        // formData.forEach((value, key ) => {
+        //     console.log(`Key: ${key} Value: ${value}`)
+        // })
+
+
+        
+        console.log(dataToSend)
+        try {
+            const response = await fetch("assets/api/suppliers.php", {
+                method: "PUT",
+                body: JSON.stringify(dataToSend),
+            });
+    
+    
+    
+            console.log(response.ok)
+    
+            if (response.ok) {
+                modal.close()
+                console.log('it works here')
+                showToast("Product added successfully!", "success");
+
+                getData()
+            } 
+        } catch (error) {
+            console.error("JSON Parse Error:", error);
+            alert("Invalid server response. Check console.");
+        } 
 
     }
 
 
 }
 
+async function deleteSupplier(supplierId){
+
+    try{
+
+        console.log(supplierId)
+
+        const response = await fetch('assets/api/suppliers.php', {
+            method: 'DELETE',
+            body: JSON.stringify(supplierId)
+        })
+
+        const text = await response.text();
+        console.log("Raw Response:", text); // Debug response
+
+        const result = JSON.parse(text);
+        console.log("Parsed JSON:", result);
+
+        if(response.ok){
+            console.log('product deleted')
+            showToast("Product deled successfully!", "success");
+            getData()
+        
+        }
+
+
+    }catch(error){
+        console.log(error)
+    }
+
+}
 
 
 
